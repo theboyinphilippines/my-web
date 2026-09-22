@@ -1,17 +1,33 @@
 ---
-
+import '../styles/global.css';
+import Header from '../components/Header.astro';
+import Books from '../components/Books.astro';
+import Tutorials from '../components/Tutorials.astro';
 ---
 
-<html lang="en">
+<html lang="zh-CN">
 	<head>
 		<meta charset="utf-8" />
 		<link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 		<link rel="icon" href="/favicon.ico" />
 		<meta name="viewport" content="width=device-width" />
 		<meta name="generator" content={Astro.generator} />
-		<title>Astro</title>
+		<title>千里的站点</title>
 	</head>
 	<body>
-		<h1>Astro</h1>
+		<Header />
+		<main class="main">
+			<Books />
+			<Tutorials />
+		</main>
 	</body>
 </html>
+
+<style>
+	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+		padding: 80px;
+	}
+</style>

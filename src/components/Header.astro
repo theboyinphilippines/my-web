@@ -1,0 +1,97 @@
+---
+import bookIcon from '../assets/icons/book.svg';
+import folderPlusIcon from '../assets/icons/folder-plus.svg';
+import editIcon from '../assets/icons/edit.svg';
+import monitorIcon from '../assets/icons/monitor.svg';
+import phoneIcon from '../assets/icons/phone.svg';
+
+const navItems = [
+  { label: '书籍', href: '/books', icon: bookIcon },
+  { label: '教程', href: '/tutorials', icon: folderPlusIcon },
+  { label: '笔记', href: '/notes', icon: editIcon },
+  { label: '应用', href: '/apps', icon: monitorIcon },
+  { label: '联系', href: '/contact', icon: phoneIcon },
+];
+---
+
+<header class="header">
+  <div class="header__inner">
+    <p class="header__title">千里的站点</p>
+    <nav class="header__nav">
+      {
+        navItems.map(({ label, href, icon }) => (
+          <a class="nav-item" href={href}>
+            <span class="nav-item__icon">
+              <img src={icon.src} width={icon.width} height={icon.height} alt="" />
+            </span>
+            <span class="nav-item__label">{label}</span>
+          </a>
+        ))
+      }
+    </nav>
+  </div>
+</header>
+
+<style>
+  .header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    padding: 30px 80px;
+    background-color: var(--surface-default);
+    border: 1px solid var(--brand-primary-2);
+  }
+
+  .header__inner {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    justify-content: space-between;
+    row-gap: 12px;
+    width: 100%;
+    padding: 10px 0;
+  }
+
+  .header__title {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-h1);
+    font-weight: var(--font-weight-h1);
+    line-height: var(--line-height-h1);
+  }
+
+  .header__nav {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    gap: 20px;
+  }
+
+  .nav-item {
+    display: flex;
+    align-items: center;
+    gap: 19px;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .nav-item__icon {
+    display: flex;
+    flex-shrink: 0;
+    align-items: center;
+    justify-content: center;
+    width: 32px;
+    height: 32px;
+  }
+
+  .nav-item__icon img {
+    display: block;
+  }
+
+  .nav-item__label {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    line-height: var(--line-height-title);
+    white-space: nowrap;
+  }
+</style>

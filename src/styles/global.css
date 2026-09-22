@@ -1,0 +1,48 @@
+:root {
+  /* Figma style guide tokens */
+  --surface-default: #f4f0eb;
+  --brand-primary-2: #1b2a4a;
+  --brand-secondary-4: #e07a5f;
+  --text-primary: #212121;
+  --icon-default: #212121;
+
+  /* H1: SF Pro Bold 48/56 */
+  --font-size-h1: 48px;
+  --line-height-h1: 56px;
+  --font-weight-h1: 700;
+
+  /* Title: SF Pro Semibold 24/32 */
+  --font-size-title: 24px;
+  --line-height-title: 32px;
+  --font-weight-title: 590;
+
+  /* H2: SF Pro Bold 32/40 */
+  --font-size-h2: 32px;
+  --line-height-h2: 40px;
+  --font-weight-h2: 700;
+
+  /* Body: SF Pro Regular 16/24 */
+  --font-size-body: 16px;
+  --line-height-body: 24px;
+  --font-weight-body: 400;
+
+  /* Body Bold: SF Pro Semibold 16/24 */
+  --font-weight-body-bold: 590;
+
+  /* SF Pro ships with Apple platforms only and can't be self-hosted, so the
+     design face is requested first and falls back through system equivalents. */
+  --font-family-sans: -apple-system, BlinkMacSystemFont, "SF Pro Display", "SF Pro Text",
+    "Helvetica Neue", "Segoe UI", Roboto, "PingFang SC", "Noto Sans SC", "Microsoft YaHei",
+    sans-serif;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--font-family-sans);
+}
