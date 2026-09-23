@@ -1,0 +1,104 @@
+---
+import bookStack from '../assets/book-stack.png';
+
+interface Props {
+  title: string;
+  body: string;
+  href: string;
+  imageLeft?: boolean;
+  textAlign?: 'left' | 'right';
+}
+
+const {
+  title,
+  body,
+  href,
+  imageLeft = false,
+  textAlign = imageLeft ? 'right' : 'left',
+} = Astro.props;
+---
+
+<article
+  class:list={['book', imageLeft && 'book--image-left', textAlign === 'right' && 'book--align-right']}
+>
+  <div class="book__text">
+    <h3 class="book__title">{title}</h3>
+    <p class="book__body">{body}</p>
+    <a class="book__link" href={href}>
+      Read more
+    </a>
+  </div>
+  <div class="book__panel">
+    <img class="book__image" src={bookStack.src} alt="" />
+  </div>
+</article>
+
+<style>
+  .book {
+    display: flex;
+    min-height: 310px;
+    border: 1px solid var(--brand-primary-2);
+  }
+
+  .book__text {
+    display: flex;
+    flex: 1 1 0;
+    flex-direction: column;
+    gap: 37px;
+    padding: 50px;
+    color: var(--text-primary);
+  }
+
+  .book__title {
+    margin: 0;
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+  }
+
+  .book__body {
+    margin: 0;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+  }
+
+  .book__link {
+    color: var(--brand-secondary-4);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body-bold);
+    line-height: var(--line-height-body);
+    text-decoration: none;
+  }
+
+  .book__panel {
+    position: relative;
+    flex: 0 0 40.6065%;
+    overflow: hidden;
+    background: linear-gradient(to bottom, #c9a96e, #f5e6c8);
+  }
+
+  .book__image {
+    position: absolute;
+    top: 11.36%;
+    left: 50.06%;
+    width: 50%;
+    height: auto;
+  }
+
+  .book--image-left .book__panel {
+    order: 1;
+  }
+
+  .book--image-left .book__text {
+    order: 2;
+  }
+
+  .book--image-left .book__link {
+    text-align: right;
+  }
+
+  .book--align-right .book__text {
+    text-align: right;
+  }
+</style>

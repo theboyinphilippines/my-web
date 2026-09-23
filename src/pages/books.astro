@@ -1,0 +1,54 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import BookCard from '../components/BookCard.astro';
+
+const books = Array.from({ length: 4 }, () => ({
+	title: 'This is a book title',
+	body: 'It is a long established fact that a reader will be the same thing I need to tell distracted by the readable content of a page when that was really funny looking at its layout. The point of using Lorem Ipsum is that....',
+	href: '#',
+}));
+---
+
+<BaseLayout title="书籍 - 千里的站点">
+	<Header />
+	<main class="main">
+		<section class="books">
+			<h2 class="books__heading">书籍</h2>
+			<div class="books__list">
+				{books.map((book) => <BookCard {...book} imageLeft textAlign="left" />)}
+			</div>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>
+
+<style>
+	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+		padding: 80px;
+	}
+
+	.books {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.books__heading {
+		margin: 0;
+		color: var(--text-primary);
+		font-size: var(--font-size-h2);
+		font-weight: var(--font-weight-h2);
+		line-height: var(--line-height-h2);
+	}
+
+	.books__list {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+	}
+</style>
