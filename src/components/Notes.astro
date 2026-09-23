@@ -1,0 +1,141 @@
+---
+const excerpt =
+  'Those were the words of a forlorn-looking German Chancellor Friedrich Merz as he addressed his party in the seconds after regional elections handed his center-right Christian Democrats (CDU) their second and third electoral drubbings in a month. Those were the words of a forlorn-looking German Chancellor Friedrich Merz as he addressed his party in the seconds after regional elections handed his center-right Christian Democrats (CDU) their second and third electoral drubbings in a month.';
+
+const notes = Array.from({ length: 3 }, () => ({
+  day: '27',
+  month: '5月',
+  author: '@qianli',
+  title: 'this is the  title of the turotials and  you have  to learn something',
+  excerpt,
+  href: '#',
+}));
+---
+
+<section class="notes">
+  <h2 class="notes__heading">笔记</h2>
+  <div class="notes__list">
+    {
+      notes.map((note) => (
+        <article class="note">
+          <div class="note__meta">
+            <p class="note__date">
+              <span>{note.day}</span>
+              <span>{note.month}</span>
+            </p>
+            <p class="note__author">{note.author}</p>
+          </div>
+          <div class="note__content">
+            <h3 class="note__title">{note.title}</h3>
+            <p class="note__excerpt">{note.excerpt}</p>
+            <a class="note__link" href={note.href}>
+              Read more
+            </a>
+          </div>
+        </article>
+      ))
+    }
+  </div>
+</section>
+
+<style>
+  .notes {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+  }
+
+  .notes__heading {
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+  }
+
+  .notes__list {
+    display: flex;
+    flex-direction: column;
+    gap: 50px;
+    padding: 30px;
+    border: 1px solid var(--brand-primary-2);
+  }
+
+  .note {
+    display: flex;
+    align-items: flex-start;
+    gap: 30px;
+    padding: 20px 0;
+  }
+
+  .note__meta {
+    display: flex;
+    flex: 0 0 55px;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 15px;
+  }
+
+  .note__date {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    margin: 0;
+    color: var(--text-primary);
+    font-size: var(--font-size-h2);
+    font-weight: var(--font-weight-h2);
+    line-height: var(--line-height-h2);
+    text-align: right;
+  }
+
+  /* The handle is a 55x55 box whose text sits bottom-right, then the whole box
+     is rotated -90deg, which reads the handle bottom-to-top down the column. */
+  .note__author {
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+    width: 55px;
+    height: 55px;
+    margin: 0;
+    transform: rotate(-90deg);
+    color: var(--text-primary);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+    text-align: right;
+  }
+
+  .note__content {
+    display: flex;
+    flex: 0 1 1057px;
+    min-width: 0;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 15px;
+    color: var(--text-primary);
+  }
+
+  .note__title {
+    width: 100%;
+    margin: 0;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    line-height: var(--line-height-title);
+  }
+
+  .note__excerpt {
+    width: 100%;
+    margin: 0;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+  }
+
+  .note__link {
+    color: var(--brand-secondary-4);
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body-bold);
+    line-height: var(--line-height-body);
+    text-decoration: none;
+  }
+</style>

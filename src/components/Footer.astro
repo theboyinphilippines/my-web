@@ -1,0 +1,72 @@
+<footer class="footer">
+  <div class="footer__content">
+    <p class="footer__copyright">© 2026 @qianli</p>
+    <nav class="footer__group footer__group--site" aria-label="站点导航">
+      <a class="footer__link" href="/books">书籍</a>
+      <a class="footer__link" href="/tutorials">教程</a>
+      <a class="footer__link" href="/notes">笔记</a>
+      <a class="footer__link" href="/">首页</a>
+    </nav>
+    <nav class="footer__group footer__group--elsewhere" aria-label="其他链接">
+      <a class="footer__link" href="/apps">应用</a>
+      <a class="footer__link" href="/contact">联系</a>
+      <a class="footer__link" href="#">Github</a>
+      <a class="footer__link" href="#">Bilibili</a>
+    </nav>
+  </div>
+</footer>
+
+<style>
+  .footer {
+    display: flex;
+    flex-direction: column;
+    height: 257px;
+    padding: 20px 80px;
+    background-color: var(--surface-default);
+    border: 1px solid var(--brand-primary-2);
+    color: var(--text-primary);
+  }
+
+  .footer__content {
+    display: flex;
+    flex: none;
+    align-items: center;
+    justify-content: center;
+    gap: 245px;
+    padding: 20px 0;
+  }
+
+  .footer__copyright {
+    margin: 0;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body-bold);
+    line-height: var(--line-height-body);
+    white-space: nowrap;
+  }
+
+  .footer__group {
+    display: flex;
+    flex: none;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+  }
+
+  .footer__group--site {
+    width: 267px;
+    height: 188px;
+  }
+
+  .footer__group--elsewhere {
+    width: 308px;
+  }
+
+  .footer__link {
+    color: inherit;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body-bold);
+    line-height: var(--line-height-body);
+    text-decoration: none;
+    white-space: nowrap;
+  }
+</style>
