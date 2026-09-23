@@ -12,18 +12,18 @@ const navItems = [
   { label: '应用', href: '/apps', icon: monitorIcon },
   { label: '联系', href: '/contact', icon: phoneIcon },
 ];
+
+const currentPath = Astro.url.pathname.replace(/\/+$/, '') || '/';
 ---
 
 <header class="header">
   <div class="header__inner">
-    <p class="header__title">千里的站点</p>
+    <a class="header__title" href="/">千里的站点</a>
     <nav class="header__nav">
       {
         navItems.map(({ label, href, icon }) => (
-          <a class="nav-item" href={href}>
-            <span class="nav-item__icon">
-              <img src={icon.src} width={icon.width} height={icon.height} alt="" />
-            </span>
+          <a class="nav-item" href={href} aria-current={href === currentPath ? 'page' : undefined}>
+            <span class="nav-item__icon" style={`--icon: url("${icon.src}")`} />
             <span class="nav-item__label">{label}</span>
           </a>
         ))
@@ -58,6 +58,7 @@ const navItems = [
     font-size: var(--font-size-h1);
     font-weight: var(--font-weight-h1);
     line-height: var(--line-height-h1);
+    text-decoration: none;
   }
 
   .header__nav {
@@ -75,17 +76,24 @@ const navItems = [
     text-decoration: none;
   }
 
-  .nav-item__icon {
-    display: flex;
-    flex-shrink: 0;
-    align-items: center;
-    justify-content: center;
-    width: 32px;
-    height: 32px;
+  /* The design marks the current page by recolouring the icon and the label
+     together, so the icon is masked and painted with currentColor. */
+  .nav-item[aria-current='page'] {
+    color: var(--brand-secondary-4);
   }
 
-  .nav-item__icon img {
+  .nav-item__icon {
     display: block;
+    flex-shrink: 0;
+    width: 32px;
+    height: 32px;
+    background-color: currentColor;
+    -webkit-mask-image: var(--icon);
+    -webkit-mask-repeat: no-repeat;
+    -webkit-mask-position: center;
+    mask-image: var(--icon);
+    mask-repeat: no-repeat;
+    mask-position: center;
   }
 
   .nav-item__label {
