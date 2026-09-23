@@ -1,0 +1,56 @@
+---
+import BaseLayout from '../layouts/BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import TutorialCard from '../components/TutorialCard.astro';
+
+const tutorials = Array.from({ length: 6 }, () => ({
+	title: 'Tutorial Title',
+	description: 'tutorial description',
+	href: '#',
+}));
+---
+
+<BaseLayout title="教程 - 千里的站点">
+	<Header />
+	<main class="main">
+		<section class="tutorials">
+			<h2 class="tutorials__heading">教程</h2>
+			<div class="tutorials__list">
+				{tutorials.map((tutorial) => <TutorialCard {...tutorial} />)}
+			</div>
+		</section>
+	</main>
+	<Footer />
+</BaseLayout>
+
+<style>
+	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 50px;
+		padding: 80px;
+	}
+
+	.tutorials {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
+	}
+
+	.tutorials__heading {
+		margin: 0;
+		color: var(--text-primary);
+		font-size: var(--font-size-h2);
+		font-weight: var(--font-weight-h2);
+		line-height: var(--line-height-h2);
+	}
+
+	.tutorials__list {
+		display: flex;
+		flex-wrap: wrap;
+		justify-content: space-between;
+		column-gap: 44.5px;
+		row-gap: 50px;
+	}
+</style>

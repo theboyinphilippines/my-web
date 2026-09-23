@@ -1,0 +1,66 @@
+---
+import bookStack from '../assets/book-stack.png';
+
+interface Props {
+  title: string;
+  description: string;
+  href: string;
+}
+
+const { title, description, href } = Astro.props;
+---
+
+<a class="tutorial" href={href}>
+  <div class="tutorial__media">
+    <img class="tutorial__image" src={bookStack.src} alt="" />
+  </div>
+  <div class="tutorial__text">
+    <h3 class="tutorial__title">{title}</h3>
+    <p class="tutorial__description">{description}</p>
+  </div>
+</a>
+
+<style>
+  .tutorial {
+    display: flex;
+    flex: 0 0 421px;
+    flex-direction: column;
+    gap: 30px;
+    border: 1px solid var(--brand-primary-2);
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  .tutorial__media {
+    height: 318px;
+  }
+
+  .tutorial__image {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+  }
+
+  .tutorial__text {
+    display: flex;
+    flex-direction: column;
+    gap: 18px;
+    min-height: 93px;
+    padding: 0 10px;
+  }
+
+  .tutorial__title {
+    margin: 0;
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    line-height: var(--line-height-title);
+  }
+
+  .tutorial__description {
+    margin: 0;
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+  }
+</style>

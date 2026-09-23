@@ -1,5 +1,5 @@
 ---
-import bookStack from '../assets/book-stack.png';
+import TutorialCard from './TutorialCard.astro';
 
 const tutorials = [
   { title: 'Tutorial Title', description: 'tutorial description', href: '#' },
@@ -11,19 +11,7 @@ const tutorials = [
 <section class="tutorials">
   <h2 class="tutorials__heading">教程</h2>
   <div class="tutorials__list">
-    {
-      tutorials.map((tutorial) => (
-        <a class="tutorial" href={tutorial.href}>
-          <div class="tutorial__media">
-            <img class="tutorial__image" src={bookStack.src} alt="" />
-          </div>
-          <div class="tutorial__text">
-            <h3 class="tutorial__title">{tutorial.title}</h3>
-            <p class="tutorial__description">{tutorial.description}</p>
-          </div>
-        </a>
-      ))
-    }
+    {tutorials.map((tutorial) => <TutorialCard {...tutorial} />)}
   </div>
 </section>
 
@@ -47,48 +35,5 @@ const tutorials = [
     flex-wrap: wrap;
     justify-content: space-between;
     gap: 44.5px;
-  }
-
-  .tutorial {
-    display: flex;
-    flex: 0 0 421px;
-    flex-direction: column;
-    gap: 30px;
-    border: 1px solid var(--brand-primary-2);
-    color: var(--text-primary);
-    text-decoration: none;
-  }
-
-  .tutorial__media {
-    height: 318px;
-  }
-
-  .tutorial__image {
-    display: block;
-    width: 100%;
-    height: 100%;
-    object-fit: contain;
-  }
-
-  .tutorial__text {
-    display: flex;
-    flex-direction: column;
-    gap: 18px;
-    min-height: 93px;
-    padding: 0 10px;
-  }
-
-  .tutorial__title {
-    margin: 0;
-    font-size: var(--font-size-title);
-    font-weight: var(--font-weight-title);
-    line-height: var(--line-height-title);
-  }
-
-  .tutorial__description {
-    margin: 0;
-    font-size: var(--font-size-body);
-    font-weight: var(--font-weight-body);
-    line-height: var(--line-height-body);
   }
 </style>
