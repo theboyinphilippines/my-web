@@ -1,18 +1,20 @@
 ---
 import bookStack from '../assets/book-stack.png';
+import type { ImageMetadata } from 'astro';
 
 interface Props {
   title: string;
   description: string;
   href: string;
+  cover?: ImageMetadata;
 }
 
-const { title, description, href } = Astro.props;
+const { title, description, href, cover } = Astro.props;
 ---
 
 <a class="tutorial" href={href}>
   <div class="tutorial__media">
-    <img class="tutorial__image" src={bookStack.src} alt="" />
+    <img class="tutorial__image" src={cover?.src ?? bookStack.src} alt="" />
   </div>
   <div class="tutorial__text">
     <h3 class="tutorial__title">{title}</h3>

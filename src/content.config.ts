@@ -12,4 +12,14 @@ const books = defineCollection({
   }),
 });
 
-export const collections = { books };
+const tutorials = defineCollection({
+  loader: glob({ pattern: '*/*.md', base: './src/content/tutorials' }),
+  schema: z.object({
+    title: z.string().optional(),
+    description: z.string().optional(),
+    href: z.string().default('#'),
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { books, tutorials };
