@@ -1,18 +1,8 @@
 ---
 import BookCard from './BookCard.astro';
+import { getBooks } from '../lib/books';
 
-const books = [
-  {
-    title: 'This is a book title',
-    body: 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that....',
-    href: '#',
-  },
-  {
-    title: 'This is a book title',
-    body: 'It is a long established fact that a reader will be the same thing I need to tell distracted by the readable content of a page when that was really funny looking at its layout. The point of using Lorem Ipsum is that....',
-    href: '#',
-  },
-];
+const books = (await getBooks()).slice(0, 2);
 ---
 
 <section class="books">

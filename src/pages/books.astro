@@ -3,12 +3,9 @@ import BaseLayout from '../layouts/BaseLayout.astro';
 import Header from '../components/Header.astro';
 import Footer from '../components/Footer.astro';
 import BookCard from '../components/BookCard.astro';
+import { getBooks } from '../lib/books';
 
-const books = Array.from({ length: 4 }, () => ({
-	title: 'This is a book title',
-	body: 'It is a long established fact that a reader will be the same thing I need to tell distracted by the readable content of a page when that was really funny looking at its layout. The point of using Lorem Ipsum is that....',
-	href: '#',
-}));
+const books = await getBooks();
 ---
 
 <BaseLayout title="书籍 - 千里的站点">
