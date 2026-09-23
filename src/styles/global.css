@@ -46,3 +46,11 @@ body {
   margin: 0;
   font-family: var(--font-family-sans);
 }
+
+/* The Figma pages are fixed 1512px frames: keep the content column at that
+   width and center it on wider viewports (the 80px gutters stay 80px), while
+   the header and footer stay full-width. */
+.main {
+  max-width: 1512px;
+  margin: 0 auto;
+}

@@ -1,11 +1,8 @@
 ---
 import TutorialCard from './TutorialCard.astro';
+import { getTutorials } from '../lib/tutorials';
 
-const tutorials = [
-  { title: 'Tutorial Title', description: 'tutorial description', href: '#' },
-  { title: 'Tutorial Title', description: 'tutorial description', href: '#' },
-  { title: 'Tutorial Title', description: 'tutorial description', href: '#' },
-];
+const tutorials = (await getTutorials()).slice(0, 3);
 ---
 
 <section class="tutorials">
@@ -31,9 +28,9 @@ const tutorials = [
   }
 
   .tutorials__list {
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between;
-    gap: 44.5px;
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    column-gap: 30px;
+    row-gap: 40px;
   }
 </style>

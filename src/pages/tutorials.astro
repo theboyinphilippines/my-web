@@ -15,7 +15,6 @@ const tutorials = await getTutorials();
 			<h2 class="tutorials__heading">教程</h2>
 			<div class="tutorials__list">
 				{tutorials.map((tutorial) => <TutorialCard {...tutorial} />)}
-				{tutorials.length % 3 === 2 && <div class="tutorials__spacer" aria-hidden="true" />}
 			</div>
 		</section>
 	</main>
@@ -45,14 +44,9 @@ const tutorials = await getTutorials();
 	}
 
 	.tutorials__list {
-		display: flex;
-		flex-wrap: wrap;
-		justify-content: space-between;
-		column-gap: 44.5px;
+		display: grid;
+		grid-template-columns: repeat(3, minmax(0, 1fr));
+		column-gap: 30px;
 		row-gap: 50px;
-	}
-
-	.tutorials__spacer {
-		flex: 0 0 421px;
 	}
 </style>
