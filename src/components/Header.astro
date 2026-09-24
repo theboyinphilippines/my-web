@@ -39,9 +39,14 @@ const isCurrent = (href: string) => currentPath === href || currentPath.startsWi
     display: flex;
     flex-direction: column;
     align-items: flex-start;
-    padding: 30px 80px;
+    justify-content: center;
+    /* 100px tall, but free to grow when the nav wraps on narrow viewports. */
+    min-height: 100px;
+    padding: 10px 80px;
     background-color: var(--surface-default);
     border: 1px solid var(--brand-primary-2);
+    border-left: none;
+    border-right: none;
   }
 
   .header__inner {
