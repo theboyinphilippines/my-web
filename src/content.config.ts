@@ -31,4 +31,18 @@ const notes = defineCollection({
   }),
 });
 
-export const collections = { books, tutorials, notes };
+const application = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/application' }),
+  schema: z.object({
+    order: z.number().default(0),
+  }),
+});
+
+const contact = defineCollection({
+  loader: glob({ pattern: '*.md', base: './src/content/contact' }),
+  schema: z.object({
+    order: z.number().default(0),
+  }),
+});
+
+export const collections = { books, tutorials, notes, application, contact };

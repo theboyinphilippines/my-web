@@ -7,21 +7,23 @@ import type { MarkdownHeading } from 'astro';
 
 interface Props {
   title: string;
-  backHref: string;
-  backLabel: string;
+  heading?: string;
+  backHref?: string;
+  backLabel?: string;
   headings: MarkdownHeading[];
 }
 
-const { title, backHref, backLabel, headings } = Astro.props;
+const { title, heading, backHref, backLabel, headings } = Astro.props;
 ---
 
 <BaseLayout title={title}>
 	<Header />
 	<main class="main">
+		{heading && <h2 class="detail__heading">{heading}</h2>}
 		<div class="detail">
 			<Outline headings={headings} />
 			<div class="detail__content">
-				<a class="detail__back" href={backHref}>&lt; {backLabel}</a>
+				{backHref && backLabel && <a class="detail__back" href={backHref}>&lt; {backLabel}</a>}
 				<article class="reading">
 					<slot />
 				</article>
@@ -33,7 +35,18 @@ const { title, backHref, backLabel, headings } = Astro.props;
 
 <style>
 	.main {
+		display: flex;
+		flex-direction: column;
+		gap: 18px;
 		padding: 80px;
+	}
+
+	.detail__heading {
+		margin: 0;
+		color: var(--text-primary);
+		font-size: var(--font-size-h2);
+		font-weight: var(--font-weight-h2);
+		line-height: var(--line-height-h2);
 	}
 
 	.detail {

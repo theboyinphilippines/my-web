@@ -1,0 +1,15 @@
+---
+import { getCollection, render } from 'astro:content';
+import DetailLayout from '../layouts/DetailLayout.astro';
+
+const entries = (await getCollection('contact')).sort(
+	(a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id),
+);
+
+const rendered = await Promise.all(entries.map((entry) => render(entry)));
+const headings = rendered.flatMap(({ headings }) => headings);
+---
+
+<DetailLayout title="联系 - 千里的站点" heading="联系" headings={headings}>
+	{rendered.map(({ Content }) => <Content />)}
+</DetailLayout>
