@@ -1,0 +1,71 @@
+---
+import arrowUpIcon from '../assets/icons/arrow-up-circle.svg';
+---
+
+<button class="to-top" type="button" aria-label="回到顶部">
+	<span class="to-top__icon" style={`--icon: url("${arrowUpIcon.src}")`} />
+</button>
+
+<script>
+	const button = document.querySelector<HTMLButtonElement>('.to-top');
+
+	if (button) {
+		const reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)');
+
+		const sync = () => {
+			// One screen of scrolling, but never more than half the page's scrollable
+			// range — a page barely taller than the viewport would otherwise never
+			// reach the threshold and the button would stay hidden for good.
+			const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
+			const threshold = Math.min(window.innerHeight, maxScroll / 2);
+			button.toggleAttribute('data-visible', window.scrollY > threshold);
+		};
+
+		sync();
+		window.addEventListener('scroll', sync, { passive: true });
+
+		button.addEventListener('click', () => {
+			window.scrollTo({ top: 0, behavior: reducedMotion.matches ? 'auto' : 'smooth' });
+		});
+	}
+</script>
+
+<style>
+	/* Placement is the design's: 25px in from the right edge, 100px up from the
+	   bottom. The button starts hidden so it is inert without JavaScript. */
+	.to-top {
+		position: fixed;
+		right: 25px;
+		bottom: 100px;
+		z-index: 10;
+		width: 50px;
+		height: 50px;
+		padding: 0;
+		border: 0;
+		background: none;
+		cursor: pointer;
+		opacity: 0;
+		visibility: hidden;
+		transition: opacity 200ms ease, visibility 200ms ease;
+	}
+
+	.to-top[data-visible] {
+		opacity: 1;
+		visibility: visible;
+	}
+
+	/* The gradient's lower stop is the Figma style "Brand Secondary 2"; the upper
+	   stop is unbound in the design system. */
+	.to-top__icon {
+		display: block;
+		width: 100%;
+		height: 100%;
+		background-image: linear-gradient(to top, var(--brand-secondary-2), #f5e6c8);
+		-webkit-mask-image: var(--icon);
+		-webkit-mask-repeat: no-repeat;
+		-webkit-mask-position: center;
+		mask-image: var(--icon);
+		mask-repeat: no-repeat;
+		mask-position: center;
+	}
+</style>
