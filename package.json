@@ -15,5 +15,8 @@
   },
   "allowScripts": {
     "esbuild": true
-  }
+  },
+  {
+  "packageManager": "yarn@4.17.0"
+}
 }
