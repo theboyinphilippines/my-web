@@ -1,0 +1,87 @@
+---
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  headings: MarkdownHeading[];
+}
+
+const { headings } = Astro.props;
+---
+
+<nav class="outline" aria-label="文章大纲">
+  <ul class="outline__list">
+    {
+      headings.map((heading) => (
+        <li class="outline__item" data-level={Math.min(heading.depth, 4)}>
+          <a class="outline__link" href={`#${heading.slug}`}>
+            {heading.text}
+          </a>
+        </li>
+      ))
+    }
+  </ul>
+</nav>
+
+<style>
+  .outline {
+    position: sticky;
+    top: 30px;
+    align-self: flex-start;
+    flex: 0 0 240px;
+    max-height: calc(100vh - 60px);
+    overflow-y: auto;
+  }
+
+  .outline__list {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+  }
+
+  .outline__link {
+    display: block;
+    color: var(--text-primary);
+    text-decoration: none;
+  }
+
+  /* Only level one exists in the design (Title 24/32); the deeper levels step
+     down so all four stay legible inside the 240px column. */
+  .outline__item[data-level='1'] .outline__link {
+    font-size: var(--font-size-title);
+    font-weight: var(--font-weight-title);
+    line-height: var(--line-height-title);
+  }
+
+  .outline__item[data-level='2'] {
+    padding-left: 20px;
+  }
+
+  .outline__item[data-level='2'] .outline__link {
+    font-size: 18px;
+    font-weight: var(--font-weight-title);
+    line-height: 26px;
+  }
+
+  .outline__item[data-level='3'] {
+    padding-left: 40px;
+  }
+
+  .outline__item[data-level='3'] .outline__link {
+    font-size: var(--font-size-body);
+    font-weight: var(--font-weight-body);
+    line-height: var(--line-height-body);
+  }
+
+  .outline__item[data-level='4'] {
+    padding-left: 60px;
+  }
+
+  .outline__item[data-level='4'] .outline__link {
+    font-size: 14px;
+    font-weight: var(--font-weight-body);
+    line-height: 22px;
+  }
+</style>

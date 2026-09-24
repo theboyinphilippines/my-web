@@ -1,15 +1,13 @@
 ---
-const excerpt =
-  'Those were the words of a forlorn-looking German Chancellor Friedrich Merz as he addressed his party in the seconds after regional elections handed his center-right Christian Democrats (CDU) their second and third electoral drubbings in a month. Those were the words of a forlorn-looking German Chancellor Friedrich Merz as he addressed his party in the seconds after regional elections handed his center-right Christian Democrats (CDU) their second and third electoral drubbings in a month.';
+import { getNotes } from '../lib/notes';
 
-const notes = Array.from({ length: 3 }, () => ({
-  day: '27',
-  month: '5月',
-  author: '@qianli',
-  title: 'this is the  title of the turotials and  you have  to learn something',
-  excerpt,
-  href: '#',
-}));
+interface Props {
+  limit?: number;
+}
+
+const { limit } = Astro.props;
+// slice(0, undefined) returns everything, so an absent limit means "all notes".
+const notes = (await getNotes()).slice(0, limit);
 ---
 
 <section class="notes">
@@ -124,6 +122,10 @@ const notes = Array.from({ length: 3 }, () => ({
   }
 
   .note__excerpt {
+    display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 3;
+    overflow: hidden;
     width: 100%;
     margin: 0;
     font-size: var(--font-size-body);

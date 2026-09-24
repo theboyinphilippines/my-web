@@ -1,0 +1,188 @@
+---
+import BaseLayout from './BaseLayout.astro';
+import Header from '../components/Header.astro';
+import Footer from '../components/Footer.astro';
+import Outline from '../components/Outline.astro';
+import type { MarkdownHeading } from 'astro';
+
+interface Props {
+  title: string;
+  backHref: string;
+  backLabel: string;
+  headings: MarkdownHeading[];
+}
+
+const { title, backHref, backLabel, headings } = Astro.props;
+---
+
+<BaseLayout title={title}>
+	<Header />
+	<main class="main">
+		<div class="detail">
+			<Outline headings={headings} />
+			<div class="detail__content">
+				<a class="detail__back" href={backHref}>&lt; {backLabel}</a>
+				<article class="reading">
+					<slot />
+				</article>
+			</div>
+		</div>
+	</main>
+	<Footer />
+</BaseLayout>
+
+<style>
+	.main {
+		padding: 80px;
+	}
+
+	.detail {
+		display: flex;
+		align-items: flex-start;
+		gap: 30px;
+	}
+
+	.detail__content {
+		display: flex;
+		flex: 1 1 0;
+		flex-direction: column;
+		gap: 50px;
+		min-width: 0;
+	}
+
+	.detail__back {
+		color: var(--text-primary);
+		font-size: var(--font-size-title);
+		font-weight: var(--font-weight-title);
+		line-height: var(--line-height-title);
+		text-decoration: none;
+	}
+
+	.reading {
+		color: var(--text-primary);
+		font-size: var(--font-size-body);
+		font-weight: var(--font-weight-body);
+		line-height: var(--line-height-body);
+	}
+
+	/* The reading area is an empty placeholder in the design, so the markdown
+	   scale is built from the site tokens: 32/40, 24/32, then 20/28. */
+	.reading :global(h1),
+	.reading :global(h2),
+	.reading :global(h3),
+	.reading :global(h4),
+	.reading :global(h5),
+	.reading :global(h6) {
+		margin: 40px 0 16px;
+		scroll-margin-top: 30px;
+	}
+
+	.reading :global(h1) {
+		font-size: var(--font-size-h2);
+		font-weight: var(--font-weight-h2);
+		line-height: var(--line-height-h2);
+	}
+
+	.reading :global(h2) {
+		font-size: var(--font-size-title);
+		font-weight: var(--font-weight-title);
+		line-height: var(--line-height-title);
+	}
+
+	.reading :global(h3) {
+		font-size: 20px;
+		font-weight: var(--font-weight-title);
+		line-height: 28px;
+	}
+
+	.reading :global(h4),
+	.reading :global(h5),
+	.reading :global(h6) {
+		font-size: var(--font-size-body);
+		font-weight: var(--font-weight-body-bold);
+		line-height: var(--line-height-body);
+	}
+
+	.reading :global(p),
+	.reading :global(ul),
+	.reading :global(ol),
+	.reading :global(pre),
+	.reading :global(table),
+	.reading :global(blockquote) {
+		margin: 0 0 16px;
+	}
+
+	.reading :global(> :first-child) {
+		margin-top: 0;
+	}
+
+	.reading :global(ul),
+	.reading :global(ol) {
+		padding-left: 24px;
+	}
+
+	.reading :global(li) {
+		margin-bottom: 8px;
+	}
+
+	.reading :global(li:last-child) {
+		margin-bottom: 0;
+	}
+
+	.reading :global(a) {
+		color: var(--brand-secondary-4);
+	}
+
+	.reading :global(strong) {
+		font-weight: var(--font-weight-body-bold);
+	}
+
+	.reading :global(code) {
+		font-family: ui-monospace, SFMono-Regular, Menlo, monospace;
+		font-size: 0.9em;
+	}
+
+	.reading :global(:not(pre) > code) {
+		padding: 2px 6px;
+		background: var(--surface-default);
+		border-radius: 4px;
+	}
+
+	.reading :global(table) {
+		width: 100%;
+		border-collapse: collapse;
+	}
+
+	.reading :global(th),
+	.reading :global(td) {
+		padding: 12px 16px;
+		border: 1px solid var(--brand-primary-2);
+		text-align: left;
+		vertical-align: top;
+		word-break: break-word;
+	}
+
+	.reading :global(th) {
+		font-weight: var(--font-weight-body-bold);
+	}
+
+	.reading :global(hr) {
+		margin: 40px 0;
+		border: 0;
+		border-top: 1px solid var(--brand-primary-2);
+	}
+
+	/* Notes use fenced blocks for prose as much as for code, so they wrap
+	   instead of scrolling sideways. Shiki owns the block's colours. */
+	.reading :global(pre) {
+		padding: 20px;
+		border-radius: 4px;
+		white-space: pre-wrap;
+		word-break: break-word;
+	}
+
+	.reading :global(blockquote) {
+		padding-left: 20px;
+		border-left: 4px solid var(--brand-secondary-4);
+	}
+</style>

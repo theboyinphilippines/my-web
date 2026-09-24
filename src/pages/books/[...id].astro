@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { bookTitle } from '../../lib/books';
+
+export async function getStaticPaths() {
+  const books = await getCollection('books');
+
+  return books.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'books'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<DetailLayout
+	title={`${bookTitle(entry)} - 千里的站点`}
+	backHref="/books"
+	backLabel="Back to books"
+	headings={headings}
+>
+	<Content />
+</DetailLayout>

@@ -1,4 +1,5 @@
 import { getCollection } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
 import type { ImageMetadata } from 'astro';
 
 const covers = import.meta.glob<{ default: ImageMetadata }>(
@@ -42,23 +43,29 @@ function firstParagraph(body: string, exclude: string) {
   return '';
 }
 
+export function bookTitle(entry: CollectionEntry<'books'>): string {
+  const stem = (entry.filePath?.split('/').pop() ?? '').replace(/\.md$/, '');
+  const body = entry.body ?? '';
+  return entry.data.title ?? (stem && stem !== 'index' ? stem : (firstHeading(body) ?? entry.id));
+}
+
 export async function getBooks(): Promise<Book[]> {
   const entries = await getCollection('books');
 
   return [...entries]
     .sort((a, b) => a.data.order - b.data.order || a.id.localeCompare(b.id))
     .map((entry) => {
-      const stem = (entry.filePath?.split('/').pop() ?? '').replace(/\.md$/, '');
+      const title = bookTitle(entry);
       const body = entry.body ?? '';
-      const title =
-        entry.data.title ?? (stem && stem !== 'index' ? stem : (firstHeading(body) ?? entry.id));
       const folder = entry.filePath && bookFolder(entry.filePath);
 
       return {
         title,
         subtitle: entry.data.subtitle ?? firstParagraph(body, title),
         cover: folder ? coversByFolder.get(folder) : undefined,
-        href: entry.data.href,
+        // The glob loader ids entries by their folder, so ids are unique even
+        // though books 1-4 share a filename.
+        href: `/books/${entry.id}`,
       };
     });
 }

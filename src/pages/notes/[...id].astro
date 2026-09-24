@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { noteTitle } from '../../lib/notes';
+
+export async function getStaticPaths() {
+  const notes = await getCollection('notes');
+
+  return notes.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'notes'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<DetailLayout
+	title={`${noteTitle(entry)} - 千里的站点`}
+	backHref="/notes"
+	backLabel="Back to notes"
+	headings={headings}
+>
+	<Content />
+</DetailLayout>

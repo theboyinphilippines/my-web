@@ -1,0 +1,31 @@
+---
+import { getCollection, render } from 'astro:content';
+import type { CollectionEntry } from 'astro:content';
+import DetailLayout from '../../layouts/DetailLayout.astro';
+import { tutorialTitle } from '../../lib/tutorials';
+
+export async function getStaticPaths() {
+  const tutorials = await getCollection('tutorials');
+
+  return tutorials.map((entry) => ({
+    params: { id: entry.id },
+    props: { entry },
+  }));
+}
+
+interface Props {
+  entry: CollectionEntry<'tutorials'>;
+}
+
+const { entry } = Astro.props;
+const { Content, headings } = await render(entry);
+---
+
+<DetailLayout
+	title={`${tutorialTitle(entry)} - 千里的站点`}
+	backHref="/tutorials"
+	backLabel="Back to tutorials"
+	headings={headings}
+>
+	<Content />
+</DetailLayout>
