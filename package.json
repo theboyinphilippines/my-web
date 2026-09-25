@@ -2,7 +2,7 @@
   "type": "module",
   "version": "0.0.1",
   "engines": {
-    "node": "22.23.2"
+    "node": ">=22"
   },
   "scripts": {
     "dev": "astro dev",
@@ -16,7 +16,6 @@
   "allowScripts": {
     "esbuild": true
   },
-  {
   "packageManager": "yarn@4.17.0"
 }
-}
+
