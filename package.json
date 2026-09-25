@@ -11,8 +11,8 @@
     "astro": "astro"
   },
   "dependencies": {
-    "astro": "^7.3.3",
     "@astrojs/cloudflare": "^14.3.3",
+    "astro": "^7.3.3",
     "wrangler": "^4.100.0"
   },
   "allowScripts": {
@@ -20,4 +20,3 @@
   },
   "packageManager": "yarn@4.17.0"
 }
-
